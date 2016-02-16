@@ -52,8 +52,6 @@ class DetailContainerTableController: UITableViewController {
     func uploadToStorage(data : NSData, blobName : String){
         
         let blobLocal = currentContainer?.blockBlobReferenceFromName(blobName)
-//        var data : NSData?
-//        data = UIImageJPEGRepresentation(UIImage(named: "picslack.jpg")!, 0.5)
         
         blobLocal?.uploadFromData(data,
             completionHandler: { (error : NSError?) -> Void in
@@ -69,6 +67,13 @@ class DetailContainerTableController: UITableViewController {
     
     // MARK: - IBActions
     
+    @IBAction func refreshTable(sender: AnyObject) {
+        // actualizar modelo + mas la vista ...
+        
+        
+        sender.endRefreshing()
+
+    }
 
     @IBAction func uploadContenido(sender: AnyObject) {
         
@@ -104,7 +109,39 @@ class DetailContainerTableController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if (editingStyle == .Delete) {
+            updateLocalModelWithIndexpath(indexPath)
+        }
+        
+    }
     
+    func updateLocalModelWithIndexpath(index : NSIndexPath){
+        
+        tableView.beginUpdates()
+        
+        //eleiminando de la vista
+        tableView.deleteRowsAtIndexPaths([index], withRowAnimation: .Automatic)
+        
+    // eleminar de azure
+        deleteBlob(model![index.row])
+    // eliminar del modelo local
+        model?.removeAtIndex(index.row)
+        
+        tableView.endUpdates()
+        
+    }
+    
+    
+    func deleteBlob(blob : AZSCloudBlob){
+        
+        blob.deleteWithCompletionHandler { (error : NSError?) -> Void in
+            if (error != nil){
+                print("error -> \(error)")
+            }
+        }
+    }
     
     // MARK: - Metodos para la Captura de video
     
@@ -152,15 +189,30 @@ class DetailContainerTableController: UITableViewController {
         if existeElFichero == nil{
             data.writeToFile(filePath, atomically: true)
             
-            uploadToStorage(data, blobName: "/video-\(NSUUID().UUIDString).mov")
+            uploadToStorage(data, blobName: "video-\(NSUUID().UUIDString).mov")
+        }
+
+    }
+    // "video:didFisnishSavingWithError:contextInfo:"
+    func video(videoPath: String, didFinishSavingWithError error: NSError?, contextInfo info:AnyObject){
+        
+        var title = "Ok"
+        var message = "Video grabado perfectamente"
+        
+        if let _ = error{
+            
+            title = "Fail"
+            message = "El video no se ha grabado"
+            
         }
         
-        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
         
         
     }
-    
-    
+
 
 }
 
@@ -172,7 +224,11 @@ extension DetailContainerTableController: UIImagePickerControllerDelegate{
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
+        
+        
         let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        dismissViewControllerAnimated(true, completion :nil)
         
         if (mediaType == kUTTypeMovie as String){
             
@@ -180,7 +236,7 @@ extension DetailContainerTableController: UIImagePickerControllerDelegate{
             
             // tenemos que persistir en local - solo por aprender
             saveInDocuments(NSData(contentsOfURL: NSURL(fileURLWithPath: path!))!)
-//            UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFisnishSavingWithError:contextInfo", nil)
+            UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
             
             
         }
