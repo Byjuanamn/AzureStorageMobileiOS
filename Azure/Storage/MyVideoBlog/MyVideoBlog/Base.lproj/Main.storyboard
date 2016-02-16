@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Vide Blogs-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MyVideoBlog" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                             <constraint firstItem="mku-Ks-moV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iT7-VF-r7Q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="GgH-N2-Z6R"/>
+                    <navigationItem key="navigationItem" title="Vide Blogs" id="GgH-N2-Z6R"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
