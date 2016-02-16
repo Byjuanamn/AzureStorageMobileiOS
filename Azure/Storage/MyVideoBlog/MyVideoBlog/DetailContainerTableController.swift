@@ -1,6 +1,8 @@
 
 
 import UIKit
+import MobileCoreServices
+
 
 class DetailContainerTableController: UITableViewController {
 
@@ -47,12 +49,13 @@ class DetailContainerTableController: UITableViewController {
         
     }
     
-    func fakeUpload(){
-        let blobLocal = currentContainer?.blockBlobReferenceFromName("blob-\(NSUUID().UUIDString)")
-        var data : NSData?
-        data = UIImageJPEGRepresentation(UIImage(named: "picslack.jpg")!, 0.5)
+    func uploadToStorage(data : NSData, blobName : String){
         
-        blobLocal?.uploadFromData(data!,
+        let blobLocal = currentContainer?.blockBlobReferenceFromName(blobName)
+//        var data : NSData?
+//        data = UIImageJPEGRepresentation(UIImage(named: "picslack.jpg")!, 0.5)
+        
+        blobLocal?.uploadFromData(data,
             completionHandler: { (error : NSError?) -> Void in
                 
                 if (error != nil){
@@ -70,7 +73,7 @@ class DetailContainerTableController: UITableViewController {
     @IBAction func uploadContenido(sender: AnyObject) {
         
       
-        fakeUpload()
+        startCaptureVideoBlogFromViewController(self, withDelegate: self)
         
         
     }
@@ -101,41 +104,31 @@ class DetailContainerTableController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+    
+    
+    // MARK: - Metodos para la Captura de video
+    
+    func startCaptureVideoBlogFromViewController(viewcontroller: UIViewController, withDelegate delegate: protocol<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) -> Bool{
+        
+        if (UIImagePickerController.isSourceTypeAvailable(.Camera) == false) {
+            
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .Camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.allowsEditing = false
+        cameraController.delegate = delegate
+        
+        presentViewController(cameraController, animated: true, completion: nil)
+        
         return true
+        
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
+    
 
     /*
     // MARK: - Navigation
@@ -146,5 +139,72 @@ class DetailContainerTableController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func saveInDocuments(data : NSData){
+        
+        let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        
+        let filePath = documents.stringByAppendingString("/video-\(NSUUID().UUIDString).mov")
+        
+        let existeElFichero = NSArray(contentsOfFile: filePath) as? [String]
+        
+        if existeElFichero == nil{
+            data.writeToFile(filePath, atomically: true)
+            
+            uploadToStorage(data, blobName: "/video-\(NSUUID().UUIDString).mov")
+        }
+        
+        
+        
+        
+    }
+    
+    
 
 }
+
+extension DetailContainerTableController: UINavigationControllerDelegate{
+    
+}
+
+extension DetailContainerTableController: UIImagePickerControllerDelegate{
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        if (mediaType == kUTTypeMovie as String){
+            
+            let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
+            
+            // tenemos que persistir en local - solo por aprender
+            saveInDocuments(NSData(contentsOfURL: NSURL(fileURLWithPath: path!))!)
+//            UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFisnishSavingWithError:contextInfo", nil)
+            
+            
+        }
+        
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
