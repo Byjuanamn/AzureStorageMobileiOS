@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  MyVideoBlog
-//
-//  Created by Juan Antonio Martin Noguera on 15/02/16.
-//  Copyright © 2016 Cloud On Mobile S.L. All rights reserved.
-//
+
 
 import UIKit
 
@@ -14,10 +8,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var accout: AZSCloudStorageAccount?
-
+    
+    let client = MSClient(
+        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
+        applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
+    )
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        
+        let item = ["Name":"Awesome item", "edad" : "18", "Pais" : "Spain"]
+        
+        let table = client.tableWithName("elementos")
+        table.insert(item) {
+            (insertedItem, error : NSError?) in
+            
+            
+            print("Tenemos noticias de Azure mobile Services")
+            if error != nil {
+                print("Error" + error!.description);
+            } else {
+                print("Item inserted, id: \(insertedItem["id"])")
+            }
+        }
+        
+        let predicate = NSPredicate(format: "edad > 17", [])
+        
+        table.readWithPredicate(predicate) { (result : MSQueryResult?, error: NSError?) -> Void in
+            
+            
+            if error != nil {
+                print("Error" + error!.description);
+            } else {
+                print("Eliminamos los mayores de 17")
+                let misRegistros : MSQueryResult = result!
+                
+                table.delete(misRegistros.items[0] as! [NSObject : AnyObject] , completion: { (resultado:AnyObject?, error : NSError?) -> Void in
+                    
+                    if error != nil{
+                        print("Error" + error!.description);
+                    } else {
+                        print("Elemento eleminado -> \(resultado)");
+                    }
+                    
+                })
+            }
+
+        }
+        
+
+        
+        
+        
         return true
     }
 

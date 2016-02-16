@@ -12,13 +12,13 @@
 		5D589B471C72723500707347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D589B451C72723500707347 /* Main.storyboard */; };
 		5D589B491C72723500707347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D589B481C72723500707347 /* Assets.xcassets */; };
 		5D589B4C1C72723500707347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D589B4A1C72723500707347 /* LaunchScreen.storyboard */; };
-		5D589B541C72745200707347 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D589B531C72745200707347 /* MicrosoftAzureMobile.framework */; };
 		5D589B561C72764400707347 /* Azure Storage Client Library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D589B551C72764400707347 /* Azure Storage Client Library.framework */; };
 		5D589B5A1C72769600707347 /* AzFake.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D589B591C72769600707347 /* AzFake.m */; };
 		5D589B5C1C72792C00707347 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D589B5B1C72792C00707347 /* libxml2.2.tbd */; };
 		5D589B5F1C72805E00707347 /* ContainersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D589B5E1C72805E00707347 /* ContainersTableController.swift */; };
 		5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */; };
 		5D79781D1C72977C004DC984 /* picslack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D79781C1C72977C004DC984 /* picslack.jpg */; };
+		5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,6 @@
 		5D589B481C72723500707347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D589B4B1C72723500707347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D589B4D1C72723500707347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5D589B531C72745200707347 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		5D589B551C72764400707347 /* Azure Storage Client Library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Azure Storage Client Library.framework"; sourceTree = "<group>"; };
 		5D589B571C72769600707347 /* MyVideoBlog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyVideoBlog-Bridging-Header.h"; sourceTree = "<group>"; };
 		5D589B581C72769600707347 /* AzFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzFake.h; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		5D589B5E1C72805E00707347 /* ContainersTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainersTableController.swift; sourceTree = "<group>"; };
 		5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerTableController.swift; sourceTree = "<group>"; };
 		5D79781C1C72977C004DC984 /* picslack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picslack.jpg; sourceTree = "<group>"; };
+		5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +45,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */,
 				5D589B5C1C72792C00707347 /* libxml2.2.tbd in Frameworks */,
 				5D589B561C72764400707347 /* Azure Storage Client Library.framework in Frameworks */,
-				5D589B541C72745200707347 /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,8 +60,8 @@
 				5D589B5B1C72792C00707347 /* libxml2.2.tbd */,
 				5D589B401C72723500707347 /* MyVideoBlog */,
 				5D589B3F1C72723500707347 /* Products */,
+				5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */,
 				5D589B551C72764400707347 /* Azure Storage Client Library.framework */,
-				5D589B531C72745200707347 /* MicrosoftAzureMobile.framework */,
 			);
 			sourceTree = "<group>";
 		};
