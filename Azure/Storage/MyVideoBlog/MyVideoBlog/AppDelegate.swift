@@ -8,16 +8,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-//    let client = MSClient(
-//        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
-//        applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
-//    )
+    let client = MSClient(
+        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
+        applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
+    )
 
     
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         
+            
+            
+            
         
 //        let item = ["Name":"Awesome item", "edad" : "18", "Pais" : "Spain"]
 //        

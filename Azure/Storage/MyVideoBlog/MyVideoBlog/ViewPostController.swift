@@ -115,23 +115,35 @@ class ViewPostController: UIViewController {
     }
     
     func uploadToStorage(data : NSData, blobName : String){
-        
-        // TODO: cambiar esta ñapa cuando sepamos valirdar usuarios
-        
-        let account = AZSCloudStorageAccount(fromConnectionString: "DefaultEndpointsProtocol=https;AccountName=videoblogapp;AccountKey=ty6AzP2qU6JKXjp8RWDzzxYgR5oyC/qLW2ZBY/tD7W75oSkCADKQ5rLUYRDTc6m1VS+R7O+hvSaHUk4tuBysPw==")
-        
-        let blobClient : AZSCloudBlobClient = account.getBlobClient()
-        
-        let container : AZSCloudBlobContainer = AZSCloudBlobContainer(name: "temporal", client: blobClient)
-        
-        let blobLocal = container.blockBlobReferenceFromName(blobName)
 
         
-        container.createContainerWithAccessType(AZSContainerPublicAccessType.Container,
-            requestOptions: nil ,
-            operationContext: nil)
-            { (error : NSError?) -> Void in
+
+        // obtener las sasurl
+        
+        client?.invokeAPI("generasasurl",
+            body: nil,
+            HTTPMethod: "GET",
+            parameters: ["blobName": blobName, "ContainerName": "temporal"],
+            headers: nil,
+            completion: { (result:AnyObject?, response: NSHTTPURLResponse?, error: NSError?) -> Void in
             
+            if error == nil {
+                
+                let sasUrl = result!["sasUrl"]
+                
+                let credentials = AZSStorageCredentials(SASToken: (sasUrl as? String)!);
+                
+                let account = AZSCloudStorageAccount(credentials: credentials, useHttps: false)
+                
+                let blobClient : AZSCloudBlobClient = account.getBlobClient()
+                
+                let container : AZSCloudBlobContainer = AZSCloudBlobContainer(name: "temporal", client: blobClient)
+                
+                let blobLocal = container.blockBlobReferenceFromName(blobName)
+                
+                // TODO: cambiar esta ñapa cuando sepamos valirdar usuarios
+                
+                
                 blobLocal.uploadFromData(data,
                     completionHandler: { (error : NSError?) -> Void in
                         
@@ -140,8 +152,18 @@ class ViewPostController: UIViewController {
                         }
                         
                 })
-        }
-  
+                
+
+            } else {
+                
+                print(error)
+                
+            }
+            
+            
+        })
+
+        
     }
 
 }
