@@ -20,6 +20,7 @@
 		5D79781D1C72977C004DC984 /* picslack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D79781C1C72977C004DC984 /* picslack.jpg */; };
 		5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */; };
 		5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */; };
+		5DDD9CA81C765F5B0066BA1A /* ViewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		5D79781C1C72977C004DC984 /* picslack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picslack.jpg; sourceTree = "<group>"; };
 		5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimelineController.swift; sourceTree = "<group>"; };
+		5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPostController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */,
+				5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */,
 			);
 			name = "ViewControllers con AMS";
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				5D589B441C72723500707347 /* ViewController.swift in Sources */,
 				5D589B421C72723500707347 /* AppDelegate.swift in Sources */,
 				5D589B5A1C72769600707347 /* AzFake.m in Sources */,
+				5DDD9CA81C765F5B0066BA1A /* ViewPostController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

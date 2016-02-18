@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Vide Blogs-->
@@ -46,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="499" y="-194"/>
         </scene>
-        <!--Table View Controller-->
+        <!--My Timeline Controller-->
         <scene sceneID="Haw-xV-K7m">
             <objects>
-                <tableViewController id="abg-40-MWU" sceneMemberID="viewController">
+                <tableViewController id="abg-40-MWU" customClass="MyTimelineController" customModule="MyVideoBlog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4I6-QY-IaB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,10 +70,71 @@
                             <outlet property="delegate" destination="abg-40-MWU" id="Lms-Hj-csl"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="PBU-H1-k9M" kind="show" identifier="addNewItem" id="I4U-mV-P2C"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6L2-Un-lKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="495"/>
+            <point key="canvasLocation" x="129" y="517"/>
+        </scene>
+        <!--View Post Controller-->
+        <scene sceneID="fd9-jm-cl6">
+            <objects>
+                <viewController id="PBU-H1-k9M" customClass="ViewPostController" customModule="MyVideoBlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jM3-es-rIJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="dBN-aL-soS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bva-TF-6Zz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please escribe el titulo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d66-gC-dPS">
+                                <rect key="frame" x="40" y="128" width="520" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Axq-iA-DXB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como minimo 10 carácteres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1B-jh-PhB">
+                                <rect key="frame" x="40" y="187" width="520" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.78039215689999997" green="0.2666666667" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqc-2q-Nde">
+                                <rect key="frame" x="40" y="216" width="520" height="30"/>
+                                <state key="normal" title="Subir el Post a Mobile Services"/>
+                                <connections>
+                                    <action selector="saveAzureAction:" destination="PBU-H1-k9M" eventType="touchUpInside" id="7pd-X4-URt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d66-gC-dPS" firstAttribute="leading" secondItem="bva-TF-6Zz" secondAttribute="leadingMargin" constant="20" id="6FG-fb-fYo"/>
+                            <constraint firstItem="R1B-jh-PhB" firstAttribute="width" secondItem="d66-gC-dPS" secondAttribute="width" id="Aha-zJ-pgC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d66-gC-dPS" secondAttribute="trailing" constant="20" id="FHB-06-0Wb"/>
+                            <constraint firstItem="dBN-aL-soS" firstAttribute="top" secondItem="R1B-jh-PhB" secondAttribute="bottom" constant="392" id="Gkt-8X-4Oa"/>
+                            <constraint firstItem="Pqc-2q-Nde" firstAttribute="leading" secondItem="R1B-jh-PhB" secondAttribute="leading" id="IpS-rv-GF6"/>
+                            <constraint firstItem="R1B-jh-PhB" firstAttribute="top" secondItem="d66-gC-dPS" secondAttribute="bottom" constant="19" id="UUo-rJ-i4v"/>
+                            <constraint firstItem="Pqc-2q-Nde" firstAttribute="top" secondItem="R1B-jh-PhB" secondAttribute="bottom" constant="8" id="bLe-1R-AqI"/>
+                            <constraint firstItem="Pqc-2q-Nde" firstAttribute="width" secondItem="R1B-jh-PhB" secondAttribute="width" id="dhR-07-Kdw"/>
+                            <constraint firstItem="d66-gC-dPS" firstAttribute="top" secondItem="jM3-es-rIJ" secondAttribute="bottom" constant="64" id="lQN-yo-Hlp"/>
+                            <constraint firstItem="R1B-jh-PhB" firstAttribute="leading" secondItem="d66-gC-dPS" secondAttribute="leading" id="usr-Q4-iCj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="saveInAzureButton" destination="Pqc-2q-Nde" id="nzg-9I-HNB"/>
+                        <outlet property="titleText" destination="d66-gC-dPS" id="U4w-SY-NWi"/>
+                        <outlet property="validatorLabel" destination="R1B-jh-PhB" id="e2H-4L-ZVN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gsP-vz-RqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800" y="517"/>
         </scene>
         <!--Containers Table Controller-->
         <scene sceneID="IXD-3R-8Is">

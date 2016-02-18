@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+let k_TableName = "Videos"
+
+
 class MyTimelineController: UITableViewController {
 
     let client = MSClient(
@@ -15,14 +19,20 @@ class MyTimelineController: UITableViewController {
         applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
     )
 
+    var model : [AnyObject]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.title = "Mis videos blog"
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "uploadContenido:")
+        self.navigationItem.rightBarButtonItem = plusButton
+        
+        
+        // modelo publicar
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        populateModel()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,16 +43,16 @@ class MyTimelineController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return (model?.count)!
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
@@ -50,15 +60,24 @@ class MyTimelineController: UITableViewController {
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    // MARK: - Popular el modelo
+    
+    func populateModel(){
+        
+        let tableBlogs = client.tableWithName(k_TableName)
+        
+        let predicate = NSPredicate(format: "", argumentArray: nil)
+        
+        tableBlogs.readWithPredicate(predicate) { (results: MSQueryResult?, error: NSError?) -> Void in
+            
+            if error == nil{
+                self.model = results?.items
+            }
+        }
+        
+        
     }
-    */
+
 
     /*
     // Override to support editing the table view.
@@ -72,20 +91,6 @@ class MyTimelineController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
