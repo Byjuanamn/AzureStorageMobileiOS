@@ -19,6 +19,7 @@
 		5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */; };
 		5D79781D1C72977C004DC984 /* picslack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D79781C1C72977C004DC984 /* picslack.jpg */; };
 		5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */; };
+		5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerTableController.swift; sourceTree = "<group>"; };
 		5D79781C1C72977C004DC984 /* picslack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picslack.jpg; sourceTree = "<group>"; };
 		5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimelineController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +78,9 @@
 		5D589B401C72723500707347 /* MyVideoBlog */ = {
 			isa = PBXGroup;
 			children = (
+				5DDD9CA41C7658BB0066BA1A /* ViewControllers con AMS */,
 				5D589B411C72723500707347 /* AppDelegate.swift */,
-				5D589B5D1C72802100707347 /* ViewControllers */,
+				5D589B5D1C72802100707347 /* ViewControllers con Storage */,
 				5D589B451C72723500707347 /* Main.storyboard */,
 				5D79781C1C72977C004DC984 /* picslack.jpg */,
 				5D589B481C72723500707347 /* Assets.xcassets */,
@@ -90,14 +93,22 @@
 			path = MyVideoBlog;
 			sourceTree = "<group>";
 		};
-		5D589B5D1C72802100707347 /* ViewControllers */ = {
+		5D589B5D1C72802100707347 /* ViewControllers con Storage */ = {
 			isa = PBXGroup;
 			children = (
 				5D589B431C72723500707347 /* ViewController.swift */,
 				5D589B5E1C72805E00707347 /* ContainersTableController.swift */,
 				5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */,
 			);
-			name = ViewControllers;
+			name = "ViewControllers con Storage";
+			sourceTree = "<group>";
+		};
+		5DDD9CA41C7658BB0066BA1A /* ViewControllers con AMS */ = {
+			isa = PBXGroup;
+			children = (
+				5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */,
+			);
+			name = "ViewControllers con AMS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 			files = (
 				5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */,
 				5D589B5F1C72805E00707347 /* ContainersTableController.swift in Sources */,
+				5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */,
 				5D589B441C72723500707347 /* ViewController.swift in Sources */,
 				5D589B421C72723500707347 /* AppDelegate.swift in Sources */,
 				5D589B5A1C72769600707347 /* AzFake.m in Sources */,
