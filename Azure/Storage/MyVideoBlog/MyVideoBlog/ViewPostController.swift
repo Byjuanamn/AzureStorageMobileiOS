@@ -17,6 +17,9 @@ class ViewPostController: UIViewController {
     @IBOutlet weak var validatorLabel: UILabel!
     @IBOutlet weak var titleText: UITextField!
     
+    var bufferVideo : NSData?
+    var myBlobName : String?
+    
     var client : MSClient?
     
     override func viewDidLoad() {
@@ -25,7 +28,7 @@ class ViewPostController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "Nuevo Post"
         
-        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "uploadContenido:")
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "capturarVideo:")
         self.navigationItem.rightBarButtonItem = plusButton
         
     }
@@ -49,9 +52,25 @@ class ViewPostController: UIViewController {
     
     @IBAction func saveAzureAction(sender: AnyObject) {
         
+        let tableVideos = client?.tableWithName("videos")
+        
+        tableVideos?.insert(["titulo": titleText.text!, "blobName" : myBlobName!, "container" : "temporal"], completion: { (insertItem, error : NSError?) -> Void in
+            
+            if error == nil {
+                print("Todo OK....pero tenemos que subir el blob")
+                
+                self.uploadToStorage(self.bufferVideo!, blobName: self.myBlobName!)
+            }
+            
+            
+        })
+        
     }
     
-    
+    func capturarVideo (sender : AnyObject){
+        
+        startCaptureVideoBlogFromViewController(self, withDelegate: self)
+    }
     
     
     // MARK: - Metodos para la Captura de video
@@ -89,7 +108,8 @@ class ViewPostController: UIViewController {
         if existeElFichero == nil{
             data.writeToFile(filePath, atomically: true)
             
-            uploadToStorage(data, blobName: "video-\(NSUUID().UUIDString).mov")
+            bufferVideo = data
+            myBlobName = "video-\(NSUUID().UUIDString).mov"
         }
         
     }
@@ -127,11 +147,11 @@ class ViewPostController: UIViewController {
 }
 
 
-extension DetailContainerTableController: UINavigationControllerDelegate{
+extension ViewPostController: UINavigationControllerDelegate{
     
 }
 
-extension DetailContainerTableController: UIImagePickerControllerDelegate{
+extension ViewPostController: UIImagePickerControllerDelegate{
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         

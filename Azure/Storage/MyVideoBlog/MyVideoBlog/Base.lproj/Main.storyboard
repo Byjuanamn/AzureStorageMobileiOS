@@ -104,7 +104,7 @@
                                 <color key="textColor" red="0.78039215689999997" green="0.2666666667" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqc-2q-Nde">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqc-2q-Nde">
                                 <rect key="frame" x="40" y="216" width="520" height="30"/>
                                 <state key="normal" title="Subir el Post a Mobile Services"/>
                                 <connections>

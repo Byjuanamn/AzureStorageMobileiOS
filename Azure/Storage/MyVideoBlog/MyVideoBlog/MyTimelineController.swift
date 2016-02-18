@@ -122,9 +122,9 @@ class MyTimelineController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "addNewItem" {
-            let vc = segue.destinationViewController
+            let vc = segue.destinationViewController as! ViewPostController
             // desde aqui podemos pasar alguna property
-//            vc.client = client
+            vc.client = client
             
         }
         
