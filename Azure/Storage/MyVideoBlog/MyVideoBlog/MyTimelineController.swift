@@ -25,7 +25,7 @@ class MyTimelineController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "Mis videos blog"
-        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "uploadContenido:")
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "addNewVideoPost:")
         self.navigationItem.rightBarButtonItem = plusButton
         
         
@@ -49,14 +49,20 @@ class MyTimelineController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (model?.count)!
+        var rows = 0
+        if model != nil {
+            rows = (model?.count)!
+        }
+        return rows
+        
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("videos", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let item = model![indexPath.row]
+        cell.textLabel!.text = item["titulo"] as? String
 
         return cell
     }
@@ -66,14 +72,23 @@ class MyTimelineController: UITableViewController {
         
         let tableBlogs = client.tableWithName(k_TableName)
         
-        let predicate = NSPredicate(format: "", argumentArray: nil)
-        
-        tableBlogs.readWithPredicate(predicate) { (results: MSQueryResult?, error: NSError?) -> Void in
+  
+        tableBlogs.readWithCompletion { (results: MSQueryResult?, error: NSError?) -> Void in
             
             if error == nil{
                 self.model = results?.items
+                self.tableView.reloadData()
             }
         }
+//        let predicate = NSPredicate(format: "", argumentArray: nil)
+
+//        tableBlogs.readWithPredicate(predicate) { (results: MSQueryResult?, error: NSError?) -> Void in
+//            
+//            if error == nil{
+//                self.model = results?.items
+//                self.tableView.reloadData()
+//            }
+//        }
         
         
     }
@@ -91,15 +106,29 @@ class MyTimelineController: UITableViewController {
     }
     */
 
+    // MARK: - Añadir un nuevo post
+    
+    func addNewVideoPost(sender : AnyObject){
+        performSegueWithIdentifier("addNewItem", sender: sender)
+        
+    }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "addNewItem" {
+            let vc = segue.destinationViewController
+            // desde aqui podemos pasar alguna property
+//            vc.client = client
+            
+        }
+        
     }
-    */
+    
 
 }
