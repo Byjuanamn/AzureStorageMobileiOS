@@ -44,7 +44,7 @@ class ViewController: UIViewController {
                     print("Tenemos Problemas")
                 } else{
                     /// Si tenemos exito ---> "facebook:22314832843290kjhfdskhf"
-                    
+                    saveAuthInfo(user)
                     
                 }
             })
