@@ -19,54 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
             
-            
-            
-        
-//        let item = ["Name":"Awesome item", "edad" : "18", "Pais" : "Spain"]
-//        
-//        let table = client.tableWithName("elementos")
-//        table.insert(item) {
-//            (insertedItem, error : NSError?) in
-//            
-//            
-//            print("Tenemos noticias de Azure mobile Services")
-//            if error != nil {
-//                print("Error" + error!.description);
-//            } else {
-//                print("Item inserted, id: \(insertedItem["id"])")
-//            }
-//        }
-//        
-//        let predicate = NSPredicate(format: "edad > 17", [])
-//        
-//        table.readWithPredicate(predicate) { (result : MSQueryResult?, error: NSError?) -> Void in
-//            
-//            
-//            if error != nil {
-//                print("Error" + error!.description);
-//            } else {
-//                print("Eliminamos los mayores de 17")
-//                let misRegistros : MSQueryResult = result!
-//                
-//                table.delete(misRegistros.items[0] as! [NSObject : AnyObject] , completion: { (resultado:AnyObject?, error : NSError?) -> Void in
-//                    
-//                    if error != nil{
-//                        print("Error" + error!.description);
-//                    } else {
-//                        print("Elemento eleminado -> \(resultado)");
-//                    }
-//                    
-//                })
-//            }
-//
-//        }
-        
-
-        
         
         
         return true
     }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

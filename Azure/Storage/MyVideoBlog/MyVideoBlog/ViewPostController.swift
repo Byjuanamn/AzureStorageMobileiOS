@@ -31,6 +31,8 @@ class ViewPostController: UIViewController {
         let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "capturarVideo:")
         self.navigationItem.rightBarButtonItem = plusButton
         
+        titleText.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,18 +54,24 @@ class ViewPostController: UIViewController {
     
     @IBAction func saveAzureAction(sender: AnyObject) {
         
-        let tableVideos = client?.tableWithName("videos")
+        let tablaVideos = client?.tableWithName("videoblogs")
         
-        tableVideos?.insert(["titulo": titleText.text!, "blobName" : myBlobName!, "container" : "temporal"], completion: { (insertItem, error : NSError?) -> Void in
+        // 1: Partimos de la base de tener ya el video y en primer lugar guardamos en base de datos
+        
+        
+        tablaVideos?.insert(["titulo" : titleText.text!, "blobName" : myBlobName!, "containername" : "pruebas"], completion: { (inserted, error: NSError?) -> Void in
             
-            if error == nil {
-                print("Todo OK....pero tenemos que subir el blob")
+            if error != nil{
+                print("Tenemos un error -> : \(error)")
+            } else {
                 
+                // 2: Persistir el blob en el Storage
+                print("Primera parte superada (Ya tenemos el registro en la BBDD, ahora toca blob")
                 self.uploadToStorage(self.bufferVideo!, blobName: self.myBlobName!)
             }
-            
-            
         })
+        
+        
         
     }
     
@@ -116,58 +124,78 @@ class ViewPostController: UIViewController {
     
     func uploadToStorage(data : NSData, blobName : String){
 
+        // vamos a invoke la api urlsastoblobandcontainer para obtener una url para poder subir
         
-
-        // obtener las sasurl
+        //1: Invocar la Api
         
-        client?.invokeAPI("generasasurl",
+        client?.invokeAPI("urlsastoblobandcontainer",
             body: nil,
             HTTPMethod: "GET",
-            parameters: ["blobName": blobName, "ContainerName": "temporal"],
+            parameters: ["blobName" : myBlobName!, "ContainerName" : "pruebas"],
             headers: nil,
-            completion: { (result:AnyObject?, response: NSHTTPURLResponse?, error: NSError?) -> Void in
-            
-            if error == nil {
+            completion: { (result : AnyObject?, response : NSHTTPURLResponse?, error: NSError?) -> Void in
                 
-                let sasUrl = result!["sasUrl"]
+                if error == nil{
+                    
+                    // 2: Tenemos solo la ruta del container/blob + la SASURL
+                    let sasURL = result!["sasUrl"] as? String
+                    
+                    // 3: url del endpoint de Storage
+                    var endPoint = "https://videoblogapp.blob.core.windows.net"
+                    
+                    endPoint += sasURL!
+                    
+                    // 4: Hemos apuntado al container de AZure Storage
+                    let container = AZSCloudBlobContainer(url: NSURL(string: endPoint)!)
+                    
+                    // 5: Creamo nuestro blob local
+                    
+                    let blobLocal = container.blockBlobReferenceFromName(blobName)
+                    
+                    // 6: Vamos a hacer el upload de nuestro blob local + NSData
+                    
+                    blobLocal.uploadFromData(data,
+                        completionHandler: { (error: NSError?) -> Void in
+                            
+                            if error == nil {
+                                
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    
+                                    self.saveInAzureButton.enabled = false
+                                    
+                                })
+                            } else {
+                                print("Tenemos un error -> \(error)")
+                            }
+        
+                    })
+                    
+                }
                 
-                let credentials = AZSStorageCredentials(SASToken: (sasUrl as? String)!);
-                
-                let account = AZSCloudStorageAccount(credentials: credentials, useHttps: false)
-                
-                let blobClient : AZSCloudBlobClient = account.getBlobClient()
-                
-                let container : AZSCloudBlobContainer = AZSCloudBlobContainer(name: "temporal", client: blobClient)
-                
-                let blobLocal = container.blockBlobReferenceFromName(blobName)
-                
-                // TODO: cambiar esta ñapa cuando sepamos valirdar usuarios
-                
-                
-                blobLocal.uploadFromData(data,
-                    completionHandler: { (error : NSError?) -> Void in
-                        
-                        if (error != nil){
-                            print("Error -> \(error)")
-                        }
-                        
-                })
-                
-
-            } else {
-                
-                print(error)
-                
-            }
-            
-            
         })
-
         
     }
 
 }
 
+
+extension ViewPostController: UITextFieldDelegate{
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        
+        let currentString = textField.text! as NSString
+        
+        if (currentString.length > 10) {
+            validatorLabel.text = "Este titulo mola"
+            validatorLabel.textColor = UIColor.greenColor()
+            saveInAzureButton.enabled = true
+        }
+        
+        
+        return true
+    }
+}
 
 extension ViewPostController: UINavigationControllerDelegate{
     

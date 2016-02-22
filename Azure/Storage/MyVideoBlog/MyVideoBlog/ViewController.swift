@@ -10,6 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let client = MSClient(
+        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
+        applicationKey:"CGrpsXnMMsSQgDmjLVpetVqHuoDtlz11"
+
+    )
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,5 +28,12 @@ class ViewController: UIViewController {
     }
 
 
+    
+    @IBAction func logarseEnRedSocial(sender: AnyObject) {
+        
+           }
+ 
+    
+    
 }
 

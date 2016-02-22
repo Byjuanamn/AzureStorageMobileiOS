@@ -1,37 +1,27 @@
-//
-//  MyTimelineController.swift
-//  MyVideoBlog
-//
-//  Created by Juan Antonio Martin Noguera on 18/02/16.
-//  Copyright © 2016 Cloud On Mobile S.L. All rights reserved.
-//
 
 import UIKit
 
 
-let k_TableName = "Videos"
 
 
 class MyTimelineController: UITableViewController {
 
-    let client = MSClient(
-        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
-        applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
-    )
-
+    let client = MSClient(applicationURL:
+        NSURL(string: "https://myvideoblogjuanamn.azure-mobile.net/"), applicationKey: "CGrpsXnMMsSQgDmjLVpetVqHuoDtlz11")
+    
     var model : [AnyObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "Mis videos blog"
-        let plusButton = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: "addNewVideoPost:")
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addNewVideoPost:")
         self.navigationItem.rightBarButtonItem = plusButton
-        
         
         // modelo publicar
 
         populateModel()
+        
         
     }
 
@@ -61,8 +51,6 @@ class MyTimelineController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("videos", forIndexPath: indexPath)
 
-        let item = model![indexPath.row]
-        cell.textLabel!.text = item["titulo"] as? String
 
         return cell
     }
@@ -70,41 +58,50 @@ class MyTimelineController: UITableViewController {
     
     func populateModel(){
         
-        let tableBlogs = client.tableWithName(k_TableName)
+        let tablaVideos = client?.tableWithName("videoblogs")
         
-  
-        tableBlogs.readWithCompletion { (results: MSQueryResult?, error: NSError?) -> Void in
-            
-            if error == nil{
-                self.model = results?.items
+        // prueba 1: obtener datos via MSTable
+        
+//        tablaVideos?.readWithCompletion({ (result:MSQueryResult?, error:NSError?) -> Void in
+//            
+//            if error == nil {
+//                self.model = result?.items
+//                self.tableView.reloadData()
+//            }
+//            
+//        })
+        
+        // prueba 2: Obtener datos via MSQuery
+        
+        let query = MSQuery(table: tablaVideos)
+        
+        // Incluir predicados, constrains para filtrar, para limitar el numero de filas o delimitar el numero de columnas
+        
+        query.orderByAscending("titulo")
+        query.readWithCompletion { (result:MSQueryResult?, error:NSError?) -> Void in
+            if error == nil {
+                self.model = result?.items
                 self.tableView.reloadData()
             }
         }
-//        let predicate = NSPredicate(format: "", argumentArray: nil)
-
-//        tableBlogs.readWithPredicate(predicate) { (results: MSQueryResult?, error: NSError?) -> Void in
-//            
-//            if error == nil{
-//                self.model = results?.items
-//                self.tableView.reloadData()
-//            }
-//        }
         
         
     }
-
-
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            tableView.beginUpdates()
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            model!.removeAtIndex(indexPath.row)
+
+            
+            tableView.endUpdates()
+        }
     }
-    */
+    
 
     // MARK: - Añadir un nuevo post
     

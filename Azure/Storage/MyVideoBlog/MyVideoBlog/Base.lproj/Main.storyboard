@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E39c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ms6-SV-0WK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E39d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ms6-SV-0WK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -32,13 +32,25 @@
                                     <segue destination="abg-40-MWU" kind="show" id="94v-eQ-nt5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmx-Sj-IqH">
+                                <rect key="frame" x="281" y="379" width="38" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="iLl-aT-jaF"/>
+                                </constraints>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="logarseEnRedSocial:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bIN-v4-7hl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lmx-Sj-IqH" firstAttribute="top" secondItem="BT3-eK-QvD" secondAttribute="bottom" constant="14" id="42A-8N-4rZ"/>
                             <constraint firstItem="BT3-eK-QvD" firstAttribute="top" secondItem="mku-Ks-moV" secondAttribute="bottom" constant="20" id="4wb-SY-o7W"/>
                             <constraint firstItem="mku-Ks-moV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8fW-Qe-gje"/>
                             <constraint firstItem="BT3-eK-QvD" firstAttribute="centerX" secondItem="mku-Ks-moV" secondAttribute="centerX" id="fkF-go-HkH"/>
                             <constraint firstItem="mku-Ks-moV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iT7-VF-r7Q"/>
+                            <constraint firstItem="lmx-Sj-IqH" firstAttribute="centerX" secondItem="BT3-eK-QvD" secondAttribute="centerX" id="qAK-6o-kft"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Vide Blogs" id="GgH-N2-Z6R"/>
@@ -72,6 +84,7 @@
                     </tableView>
                     <connections>
                         <segue destination="PBU-H1-k9M" kind="show" identifier="addNewItem" id="I4U-mV-P2C"/>
+                        <segue destination="zY0-nc-Icd" kind="show" identifier="verVideoPost" id="Qxn-jJ-S4b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6L2-Un-lKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,12 +112,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como minimo 10 carácteres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1B-jh-PhB">
-                                <rect key="frame" x="40" y="187" width="520" height="21"/>
+                                <rect key="frame" x="40" y="178" width="520" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.78039215689999997" green="0.2666666667" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqc-2q-Nde">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqc-2q-Nde">
                                 <rect key="frame" x="40" y="216" width="520" height="30"/>
                                 <state key="normal" title="Subir el Post a Mobile Services"/>
                                 <connections>
@@ -119,7 +132,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="d66-gC-dPS" secondAttribute="trailing" constant="20" id="FHB-06-0Wb"/>
                             <constraint firstItem="dBN-aL-soS" firstAttribute="top" secondItem="R1B-jh-PhB" secondAttribute="bottom" constant="392" id="Gkt-8X-4Oa"/>
                             <constraint firstItem="Pqc-2q-Nde" firstAttribute="leading" secondItem="R1B-jh-PhB" secondAttribute="leading" id="IpS-rv-GF6"/>
-                            <constraint firstItem="R1B-jh-PhB" firstAttribute="top" secondItem="d66-gC-dPS" secondAttribute="bottom" constant="19" id="UUo-rJ-i4v"/>
+                            <constraint firstItem="R1B-jh-PhB" firstAttribute="top" secondItem="d66-gC-dPS" secondAttribute="bottom" constant="10" id="UUo-rJ-i4v"/>
                             <constraint firstItem="Pqc-2q-Nde" firstAttribute="top" secondItem="R1B-jh-PhB" secondAttribute="bottom" constant="8" id="bLe-1R-AqI"/>
                             <constraint firstItem="Pqc-2q-Nde" firstAttribute="width" secondItem="R1B-jh-PhB" secondAttribute="width" id="dhR-07-Kdw"/>
                             <constraint firstItem="d66-gC-dPS" firstAttribute="top" secondItem="jM3-es-rIJ" secondAttribute="bottom" constant="64" id="lQN-yo-Hlp"/>
@@ -135,6 +148,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsP-vz-RqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="800" y="517"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xsd-Kr-tTU">
+            <objects>
+                <viewController id="zY0-nc-Icd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wEw-HV-7Nw"/>
+                        <viewControllerLayoutGuide type="bottom" id="CWz-Ds-jhj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dkl-zf-G9e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ief-sX-hXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="1265"/>
         </scene>
         <!--Containers Table Controller-->
         <scene sceneID="IXD-3R-8Is">
