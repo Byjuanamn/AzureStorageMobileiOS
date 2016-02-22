@@ -51,7 +51,8 @@ class MyTimelineController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("videos", forIndexPath: indexPath)
 
-
+        cell.textLabel?.text = model![indexPath.row]["titulo"] as? String
+        
         return cell
     }
     // MARK: - Popular el modelo

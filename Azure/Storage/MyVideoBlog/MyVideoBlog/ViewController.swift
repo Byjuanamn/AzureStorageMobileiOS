@@ -31,8 +31,38 @@ class ViewController: UIViewController {
     
     @IBAction func logarseEnRedSocial(sender: AnyObject) {
         
-           }
+    // primero comprobar si estamos logados
+        if client.currentUser != nil {
+            
+            print("Estamos logados")
+            
+        } else{
+           
+            client.loginWithProvider("facebook", controller: self, animated: true, completion: { (user: MSUser?, error: NSError?) -> Void in
+                
+                if (error != nil){
+                    print("Tenemos Problemas")
+                } else{
+                    /// Si tenemos exito ---> "facebook:22314832843290kjhfdskhf"
+                    
+                    
+                }
+            })
+        }
+        
+    }
  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }

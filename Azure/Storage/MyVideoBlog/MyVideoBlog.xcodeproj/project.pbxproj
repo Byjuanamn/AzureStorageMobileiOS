@@ -18,6 +18,7 @@
 		5D589B5F1C72805E00707347 /* ContainersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D589B5E1C72805E00707347 /* ContainersTableController.swift */; };
 		5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */; };
 		5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */; };
+		5DDA01E11C7BB54200E3A624 /* helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA01E01C7BB54200E3A624 /* helpers.swift */; };
 		5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */; };
 		5DDD9CA81C765F5B0066BA1A /* ViewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		5D589B5E1C72805E00707347 /* ContainersTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainersTableController.swift; sourceTree = "<group>"; };
 		5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerTableController.swift; sourceTree = "<group>"; };
 		5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		5DDA01E01C7BB54200E3A624 /* helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpers.swift; sourceTree = "<group>"; };
 		5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimelineController.swift; sourceTree = "<group>"; };
 		5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPostController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 		5D589B401C72723500707347 /* MyVideoBlog */ = {
 			isa = PBXGroup;
 			children = (
+				5DDA01DF1C7BB51C00E3A624 /* funciones de ayuda */,
 				5DDD9CA41C7658BB0066BA1A /* ViewControllers con AMS */,
 				5D589B411C72723500707347 /* AppDelegate.swift */,
 				5D589B5D1C72802100707347 /* ViewControllers con Storage */,
@@ -100,6 +103,14 @@
 				5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */,
 			);
 			name = "ViewControllers con Storage";
+			sourceTree = "<group>";
+		};
+		5DDA01DF1C7BB51C00E3A624 /* funciones de ayuda */ = {
+			isa = PBXGroup;
+			children = (
+				5DDA01E01C7BB54200E3A624 /* helpers.swift */,
+			);
+			name = "funciones de ayuda";
 			sourceTree = "<group>";
 		};
 		5DDD9CA41C7658BB0066BA1A /* ViewControllers con AMS */ = {
@@ -185,6 +196,7 @@
 				5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */,
 				5D589B5F1C72805E00707347 /* ContainersTableController.swift in Sources */,
 				5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */,
+				5DDA01E11C7BB54200E3A624 /* helpers.swift in Sources */,
 				5D589B441C72723500707347 /* ViewController.swift in Sources */,
 				5D589B421C72723500707347 /* AppDelegate.swift in Sources */,
 				5D589B5A1C72769600707347 /* AzFake.m in Sources */,
