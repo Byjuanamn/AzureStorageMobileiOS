@@ -54,22 +54,51 @@ class ViewPostController: UIViewController {
     
     @IBAction func saveAzureAction(sender: AnyObject) {
         
-        let tablaVideos = client?.tableWithName("videoblogs")
-        
-        // 1: Partimos de la base de tener ya el video y en primer lugar guardamos en base de datos
-        
-        
-        tablaVideos?.insert(["titulo" : titleText.text!, "blobName" : myBlobName!, "containername" : "pruebas"], completion: { (inserted, error: NSError?) -> Void in
+        if isUserloged() {
             
-            if error != nil{
-                print("Tenemos un error -> : \(error)")
-            } else {
+            // Cargamos los datos del usuario que ya hizo login
+            if let usrlogin = loadUserAuthInfo() {
+                client!.currentUser = MSUser(userId: usrlogin.usr)
+                client!.currentUser.mobileServiceAuthenticationToken = usrlogin.tok
                 
-                // 2: Persistir el blob en el Storage
-                print("Primera parte superada (Ya tenemos el registro en la BBDD, ahora toca blob")
-                self.uploadToStorage(self.bufferVideo!, blobName: self.myBlobName!)
+                let tablaVideos = client?.tableWithName("videoblogs")
+                
+                // 1: Partimos de la base de tener ya el video y en primer lugar guardamos en base de datos
+                
+                
+                tablaVideos?.insert(["titulo" : titleText.text!, "blobName" : myBlobName!, "containername" : "pruebas"], completion: { (inserted, error: NSError?) -> Void in
+                    
+                    if error != nil{
+                        print("Tenemos un error -> : \(error)")
+                    } else {
+                        
+                        // 2: Persistir el blob en el Storage
+                        print("Primera parte superada (Ya tenemos el registro en la BBDD, ahora toca blob")
+                        self.uploadToStorage(self.bufferVideo!, blobName: self.myBlobName!)
+                    }
+                })
+
+                
             }
-        })
+        } else {
+            
+            // no estamos logados.....podemos forzar el login 
+            
+            
+            client!.loginWithProvider("facebook", controller: self, animated: true, completion: { (user: MSUser?, error: NSError?) -> Void in
+                
+                if (error != nil){
+                    print("Tenemos Problemas")
+                } else{
+                    
+                    // Persistimos los credenciales del usuario
+                    saveAuthInfo(user)
+                    
+                }
+            })
+
+            
+        }
         
         
         

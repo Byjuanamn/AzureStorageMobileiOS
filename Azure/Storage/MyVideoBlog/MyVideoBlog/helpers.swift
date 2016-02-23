@@ -7,6 +7,11 @@
 import Foundation
 
 
+let kEndpointMobileService = "https://myvideoblogjuanamn.azure-mobile.net/"
+let kAppKeyMobileService = "XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
+let kEndpointAzureStorage = "https://videoblogapp.blob.core.windows.net"
+
+
 func saveAuthInfo (currentUser : MSUser?){
     
     NSUserDefaults.standardUserDefaults().setObject(currentUser?.userId, forKey: "userId")
@@ -15,7 +20,7 @@ func saveAuthInfo (currentUser : MSUser?){
 }
 
 
-func loadUserAuthInfo() -> (usr : String, tok : String){
+func loadUserAuthInfo() -> (usr : String, tok : String)? {
     
     let user = NSUserDefaults.standardUserDefaults().objectForKey("userId") as? String
     let token = NSUserDefaults.standardUserDefaults().objectForKey("tokenId") as? String
@@ -35,4 +40,24 @@ func isUserloged() -> Bool {
     
     return result
     
+}
+
+
+// MARK: - Esta funcion nos permite generar la url para guardar en el directorio documents un blob
+
+func saveInDocuments(data : NSData) -> NSURL {
+    
+    let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let writePath = documents.stringByAppendingString("/videotemp.mov")
+    
+    let array = NSArray(contentsOfFile: writePath) as? [String]
+    
+    if array == nil {
+        
+        data.writeToFile(writePath, atomically: true)
+        
+        
+    }
+    
+    return (NSURL(fileURLWithPath: writePath))
 }

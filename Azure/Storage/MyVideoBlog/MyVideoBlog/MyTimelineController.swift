@@ -104,6 +104,12 @@ class MyTimelineController: UITableViewController {
     }
     
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        performSegueWithIdentifier("detailPost", sender:indexPath)
+    }
+    
+    
     // MARK: - Añadir un nuevo post
     
     func addNewVideoPost(sender : AnyObject){
@@ -119,12 +125,28 @@ class MyTimelineController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "addNewItem" {
+        
+        guard let identifier = segue.identifier else{
+            print("no tenemos identifier")
+            return
+        }
+        
+        switch identifier{
+        case "addNewItem":
             let vc = segue.destinationViewController as! ViewPostController
             // desde aqui podemos pasar alguna property
             vc.client = client
+            break
+        case "detailPost":
+            let index = sender as? NSIndexPath
+            let vc = segue.destinationViewController as! DetailPostController
+            vc.client = client
+            vc.record = model![(index?.row)!]
+            break
+        default: break
             
         }
+
         
     }
     

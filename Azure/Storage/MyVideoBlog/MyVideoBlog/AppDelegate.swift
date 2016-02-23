@@ -9,8 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     let client = MSClient(
-        applicationURLString:"https://myvideoblogjuanamn.azure-mobile.net/",
-        applicationKey:"XObHPCejvWSJAqJRHJshIiZSMLpaVA37"
+        applicationURLString: kEndpointMobileService,
+        applicationKey: kAppKeyMobileService
     )
 
     
@@ -19,12 +19,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
             
-        
+            let notificationSettings = UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil )
+            UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
         
         return true
     }
 
 
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        client.push.registerNativeWithDeviceToken(deviceToken, tags: nil) { (error: NSError?) -> Void in
+            
+            if error != nil {
+                
+                print("Error -> \(error)")
+            }
+        }
+        
+        
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        let payload = userInfo as Dictionary
+        print(payload)
+
+        
+    }
+    
+//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//        code
+//    }
+    
+    
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

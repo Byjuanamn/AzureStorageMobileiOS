@@ -32,9 +32,17 @@ class ViewController: UIViewController {
     @IBAction func logarseEnRedSocial(sender: AnyObject) {
         
     // primero comprobar si estamos logados
-        if client.currentUser != nil {
+        if isUserloged() {
             
             print("Estamos logados")
+            
+            
+            // Cargamos los datos del usuario que ya hizo login
+            if let usrlogin = loadUserAuthInfo() {
+                client.currentUser = MSUser(userId: usrlogin.usr)
+                client.currentUser.mobileServiceAuthenticationToken = usrlogin.tok
+                
+            }
             
         } else{
            
@@ -43,7 +51,10 @@ class ViewController: UIViewController {
                 if (error != nil){
                     print("Tenemos Problemas")
                 } else{
-                    /// Si tenemos exito ---> "facebook:22314832843290kjhfdskhf"
+                    
+                    // Persistimos los credenciales del usuario
+                    
+                    
                     saveAuthInfo(user)
                     
                 }

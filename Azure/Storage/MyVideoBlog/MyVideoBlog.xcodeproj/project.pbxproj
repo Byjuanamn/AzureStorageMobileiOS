@@ -19,6 +19,7 @@
 		5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */; };
 		5D8927DB1C73D8F500A86693 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */; };
 		5DDA01E11C7BB54200E3A624 /* helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA01E01C7BB54200E3A624 /* helpers.swift */; };
+		5DDA01E51C7C79E400E3A624 /* DetailPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA01E41C7C79E400E3A624 /* DetailPostController.swift */; };
 		5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */; };
 		5DDD9CA81C765F5B0066BA1A /* ViewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		5D79781A1C728FC7004DC984 /* DetailContainerTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerTableController.swift; sourceTree = "<group>"; };
 		5D8927DA1C73D8F500A86693 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		5DDA01E01C7BB54200E3A624 /* helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpers.swift; sourceTree = "<group>"; };
+		5DDA01E41C7C79E400E3A624 /* DetailPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostController.swift; sourceTree = "<group>"; };
 		5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimelineController.swift; sourceTree = "<group>"; };
 		5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPostController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +120,7 @@
 			children = (
 				5DDD9CA51C7659160066BA1A /* MyTimelineController.swift */,
 				5DDD9CA71C765F5B0066BA1A /* ViewPostController.swift */,
+				5DDA01E41C7C79E400E3A624 /* DetailPostController.swift */,
 			);
 			name = "ViewControllers con AMS";
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				5D79781B1C728FC7004DC984 /* DetailContainerTableController.swift in Sources */,
 				5D589B5F1C72805E00707347 /* ContainersTableController.swift in Sources */,
 				5DDD9CA61C7659160066BA1A /* MyTimelineController.swift in Sources */,
+				5DDA01E51C7C79E400E3A624 /* DetailPostController.swift in Sources */,
 				5DDA01E11C7BB54200E3A624 /* helpers.swift in Sources */,
 				5D589B441C72723500707347 /* ViewController.swift in Sources */,
 				5D589B421C72723500707347 /* AppDelegate.swift in Sources */,
